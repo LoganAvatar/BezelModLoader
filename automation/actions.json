@@ -1,0 +1,30 @@
+[
+  {
+    "script": "Main.class",
+    "file": "com/giab/games/gcfw/steam/Main.class.asasm",
+    "actions": [
+      {
+        "type": "replace",
+        "identifier": "\".*an error has occured.*\"",
+        "value": "\"Unfortunately, an error has occured in the game:\\n(game version stamp:\""
+      },
+      {
+        "type": "replace",
+        "identifier": "\".*Could you please copy this message.*\"",
+        "value": "\"\\n\\nTHE GAME IS MODDED!\\n\\nPlease check the log in \\\"%AppData%/Roaming/com.giab.games.gcfw.steam/Local Store/Bezel Mod Loader\\\" for additional info!\\n\\nYou can ask for help in GemCraft\\'s discord #modding channel.\\n\\nThank you for your help and sorry for the inconvenience!\""
+      },
+      {
+        "type": "inject",
+        "identifier": "callpropvoid.*populateWizStashesInModes",
+        "offset": "2",
+        "value": "getlocal0"
+      },
+      {
+        "type": "inject",
+        "identifier": "callpropvoid.*populateWizStashesInModes",
+        "offset": "3",
+        "value": "callpropvoid QName(PackageNamespace(\"\"),\"loadBezelModLoader\"), 0"
+      }
+    ]
+  }
+]
