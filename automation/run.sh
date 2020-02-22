@@ -9,4 +9,4 @@ docker run \
   --mount type=bind,source="$(pwd)/abc/",target="/input/abc",readonly \
   --mount type=bind,source="$(pwd)/output/",target="/output/" \
   loganavatar/bezel:latest \
-  /bin/bash
+  create_patch.sh
