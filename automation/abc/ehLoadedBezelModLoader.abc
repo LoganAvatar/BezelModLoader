@@ -1,4 +1,4 @@
-trait method QName(PackageNamespace(""), "ehLoadedBezelModLoader")
+  trait method QName(PackageNamespace(""), "ehLoadedBezelModLoader")
    method
     name "ehLoadedBezelModLoader"
     refid "com.giab.games.gcfw.steam:Main/instance/ehLoadedBezelModLoader"

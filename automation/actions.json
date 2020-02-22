@@ -6,12 +6,12 @@
       {
         "type": "replace",
         "identifier": "\".*an error has occured.*\"",
-        "value": "\"Unfortunately, an error has occured in the game:\\n(game version stamp:\""
+        "value": "\"Unfortunately, an error has occured in the game:\\n(game version stamp: \""
       },
       {
         "type": "replace",
         "identifier": "\".*Could you please copy this message.*\"",
-        "value": "\"\\n\\nTHE GAME IS MODDED!\\n\\nPlease check the log in \\\"%AppData%/Roaming/com.giab.games.gcfw.steam/Local Store/Bezel Mod Loader\\\" for additional info!\\n\\nYou can ask for help in GemCraft\\'s discord #modding channel.\\n\\nThank you for your help and sorry for the inconvenience!\""
+        "value": "\"\\n\\nTHE GAME IS MODDED!\\n\\nPlease check the log in \\\"%AppData%/Roaming/com.giab.games.gcfw.steam/Local Store/Bezel Mod Loader\\\" for additional info!\\n\\nYou can ask for help in GemCraft's discord #modding channel.\\n\\nThank you for your help and sorry for the inconvenience!\""
       },
       {
         "type": "inject",
@@ -26,16 +26,10 @@
         "value": "callpropvoid QName(PackageNamespace(\"\"),\"loadBezelModLoader\"), 0"
       },
       {
-        "type": "inject",
-        "identifier": "trait.*slot.*isTrialMsg",
-        "offset": "0",
-        "value": "trait slot QName(PackageNamespace(\"\"), \"bezel\") type QName(PackageNamespace(\"\"), \"Object\") end"
-      },
-      {
-        "type": "inject",
-        "identifier": "trait.*slot.*isTrialMsg",
-        "offset": "1",
-        "value": "trait slot QName(PackageNamespace(\"\"), \"bezelLoader\") type QName(PackageNamespace(\"flash.display\"), \"Loader\") end"
+        "type": "insert",
+        "identifier": "trait.*method.*com.giab.games.gcfw.steam.*frame3",
+        "offset": "22",
+        "file": "ehLoadedBezelModLoader.abc"
       },
       {
         "type": "insert",
@@ -44,10 +38,16 @@
         "file": "loadBezelModLoader.abc"
       },
       {
-        "type": "insert",
+        "type": "inject",
         "identifier": "trait.*method.*com.giab.games.gcfw.steam.*frame3",
         "offset": "22",
-        "file": "ehLoadedBezelModLoader.abc"
+        "value": "trait slot QName(PackageNamespace(\"\"), \"bezel\") type QName(PackageNamespace(\"\"), \"Object\") end"
+      },
+      {
+        "type": "inject",
+        "identifier": "trait.*method.*com.giab.games.gcfw.steam.*frame3",
+        "offset": "23",
+        "value": "trait slot QName(PackageNamespace(\"\"), \"bezelLoader\") type QName(PackageNamespace(\"flash.display\"), \"Loader\") end"
       }
     ]
   },
