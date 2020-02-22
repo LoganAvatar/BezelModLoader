@@ -6,6 +6,7 @@ source log4bash.sh
 SCRIPT_DIR="$@"
 
 INPUT_DIR=${INPUT_DIR:-"/input"}
+ABC_DIR=${ABC_DIR:-"${INPUT_DIR}/abc"}
 ACTIONS_FILE=${ACTIONS_FILE:-"actions.json"}
 
 main() {
@@ -21,6 +22,7 @@ main() {
     log_info "Working on actions for script: $(echo $SCRIPT | jq -r '.script')"
     FILE=$(echo $SCRIPT | jq -r '.file')
     FILE_PATH=$SCRIPT_DIR/${FILE}
+    # TODO Validate file exists
 
     # Interate through each action
     echo "$SCRIPT" | jq -c '.actions[]' | while IFS= read -r ACTION ; do
@@ -35,6 +37,16 @@ main() {
           replace "$I" "$V" "$FILE_PATH"
           ;;
 
+        replaceline)
+          I=$(echo $ACTION | jq -r '.identifier')
+          OF=$(echo $ACTION | jq -r '.offset')
+          V=$(echo $ACTION | jq -r '.value')
+          ILN=$(find_line "$I" "$FILE_PATH")
+          VLN=$(($ILN + $OF))
+          log_info "Running replaceline"
+          replaceline "$VLN" "$V" "$FILE_PATH"
+          ;;
+
         inject)
           I=$(echo $ACTION | jq -r '.identifier')
           V=$(echo $ACTION | jq -r '.value')
@@ -46,7 +58,14 @@ main() {
           ;;
 
         insert)
-          NOT_READY
+          I=$(echo $ACTION | jq -r '.identifier')
+          OF=$(echo $ACTION | jq -r '.offset')
+          VF=$(echo $ACTION | jq -r '.file')
+          VF="${ABC_DIR}/${VF}"
+          ILN=$(find_line "$I" "$FILE_PATH")
+          VLN=$(($ILN + $OF))
+          log_info "Running insert"
+          insert "$VLN" "$VF" "$FILE_PATH"
           ;;
 
         *)
@@ -72,6 +91,15 @@ replace() {
   sed -i -r "$RX" "$FP"
 }
 
+replaceline() {
+  VLN=$1
+  V=$2
+  FP=$3
+  v=$(clean_for_insert "$V")
+
+  sed -i "${VLN}s/.*/$V/" "$FP"
+}
+
 inject() {
 
   V=$1
@@ -80,6 +108,14 @@ inject() {
   V=$(clean_for_insert "$V")
 
   sed -i "${VLN} a ${V}" "$FP"
+}
+
+insert() {
+
+    VLN=$1
+    VF=$2
+    FP=$3
+    sed -i "${VLN} r ${VF}" "$FP"
 }
 
 clean_for_regex() {

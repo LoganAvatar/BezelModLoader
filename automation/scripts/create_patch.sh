@@ -53,7 +53,7 @@ export_and_disassemble() {
   abcexport "${INPUT_DIR}/${GAME_FILENAME}"
 
   log_info "Moving ${ABC_EXTENSION} file to work directory"
-  mv "${INPUT_DIR}/${ABC_FILENAME}" .
+  mv "${INPUT_DIR}/${ABC_FILENAME}" ${WORK_DIR}
 
   log_info "Disassembling"
   rabcdasm "${WORK_DIR}/${ABC_FILENAME}"

@@ -24,6 +24,84 @@
         "identifier": "callpropvoid.*populateWizStashesInModes",
         "offset": "3",
         "value": "callpropvoid QName(PackageNamespace(\"\"),\"loadBezelModLoader\"), 0"
+      },
+      {
+        "type": "inject",
+        "identifier": "trait.*slot.*isTrialMsg",
+        "offset": "0",
+        "value": "trait slot QName(PackageNamespace(\"\"), \"bezel\") type QName(PackageNamespace(\"\"), \"Object\") end"
+      },
+      {
+        "type": "inject",
+        "identifier": "trait.*slot.*isTrialMsg",
+        "offset": "1",
+        "value": "trait slot QName(PackageNamespace(\"\"), \"bezelLoader\") type QName(PackageNamespace(\"flash.display\"), \"Loader\") end"
+      },
+      {
+        "type": "insert",
+        "identifier": "trait.*method.*com.giab.games.gcfw.steam.*frame3",
+        "offset": "22",
+        "file": "loadBezelModLoader.abc"
+      },
+      {
+        "type": "insert",
+        "identifier": "trait.*method.*com.giab.games.gcfw.steam.*frame3",
+        "offset": "22",
+        "file": "ehLoadedBezelModLoader.abc"
+      }
+    ]
+  },
+  {
+    "script": "IngameInfoPanelRenderer2.class",
+    "file": "com/giab/games/gcfw/steam/ingame/IngameInfoPanelRenderer2.class.asasm",
+    "actions": [
+      {
+        "type": "insert",
+        "identifier": "trait.*method.*renderMonsterInfoPanel",
+        "offset": "-17",
+        "file": "renderInfoPanelGem.abc"
+      }
+    ]
+  },
+  {
+    "script": "IngameInputHandler2.class",
+    "file": "com/giab/games/gcfw/steam/ingame/IngameInputHandler2.class.asasm",
+    "actions": [
+      {
+        "type": "insert",
+        "identifier": "CAST_STRIKESPELL_INITIATED",
+        "offset": "-5",
+        "file": "clickOnScene.abc"
+      },
+      {
+        "type": "insert",
+        "identifier": "trait.*method.*rightClickOnScene",
+        "offset": "39",
+        "file": "rightClickOnScene.abc"
+      },
+      {
+        "type": "insert",
+        "identifier": "QName.*PackageNamespace.*\"\".*.*\"B\"",
+        "offset": "-7",
+        "file": "ehKeyDown.abc"
+      },
+      {
+        "type": "replaceline",
+        "identifier": "trait.*method.*rightClickOnScene",
+        "offset": "17",
+        "value": "     maxstack 14"
+      }
+    ]
+  },
+  {
+    "script": "IngameInfoPanelRenderer.class",
+    "file": "com/giab/games/gcfw/steam/ingame/IngameInfoPanelRenderer.class.asasm",
+    "actions": [
+      {
+        "type": "insert",
+        "identifier": "CHANGE_TARGET_TYPE_DRAGGING",
+        "offset": "7",
+        "file": "renderInfoPanel.abc"
       }
     ]
   }
