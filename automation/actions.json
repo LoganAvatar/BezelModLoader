@@ -82,7 +82,7 @@
       {
         "type": "insert",
         "identifier": "QName.*PackageNamespace.*\"\".*.*\"B\"",
-        "offset": "-7",
+        "offset": "-5",
         "file": "ehKeyDown.abc"
       },
       {
