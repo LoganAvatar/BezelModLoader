@@ -142,7 +142,7 @@ find_line() {
   RX=$1
   FP=$2
   RX=$(clean_for_regex "$RX")
-  echo $(grep -En $RX $FP | cut -d':' -f1)
+  echo $(grep -En $RX "$FP" | cut -d':' -f1)
 }
 
 # usage: gsub_literal STR REP
